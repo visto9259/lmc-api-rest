@@ -7,6 +7,7 @@ namespace Lmc\Api\Rest;
 use Laminas\InputFilter\InputFilterInterface;
 use Laminas\Paginator\Paginator;
 use Lmc\Api\Auth\Identity\IdentityInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -54,4 +55,6 @@ interface ResourceHandlerInterface
      * Fetch a collection of records
      */
     public function fetchAll(array $params = []): Paginator|ResponseInterface;
+
+    public function setRequest(RequestInterface $request): self;
 }

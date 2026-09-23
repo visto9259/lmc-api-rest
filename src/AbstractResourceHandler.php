@@ -10,6 +10,7 @@ use Lmc\Api\Auth\Identity\IdentityInterface;
 use Lmc\Api\Problem\ApiProblem;
 use Lmc\Api\Problem\ApiProblemResponse;
 use Override;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractResourceHandler implements ResourceHandlerInterface
@@ -33,6 +34,8 @@ abstract class AbstractResourceHandler implements ResourceHandlerInterface
      * Input filter, if discovered in the resource event.
      */
     protected ?InputFilterInterface $inputFilter = null;
+
+    protected ?RequestInterface $request = null;
 
     /**
      * Set the entity_class for the controller config calling this resource
@@ -92,6 +95,18 @@ abstract class AbstractResourceHandler implements ResourceHandlerInterface
     {
         $this->inputFilter = $inputFilter;
         return $this;
+    }
+
+    #[Override]
+    public function setRequest(RequestInterface $request): self
+    {
+        $this->request = $request;
+        return $this;
+    }
+
+    public function getRequest(): ?RequestInterface
+    {
+        return $this->request;
     }
 
     /**
