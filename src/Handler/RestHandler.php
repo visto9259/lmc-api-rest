@@ -97,6 +97,8 @@ class RestHandler implements RequestHandlerInterface
         $validatedParams = $request->getAttribute('validated_params');
         $this->resource->setInputFilter($inputFilter);
 
+        $this->resource->setRequest($request);
+
         return match ($method) {
             'GET' => $this->handleGet($request, $isCollectionRequest),
             'POST' => $this->handlePost($request, $isCollectionRequest, $validatedParams),
